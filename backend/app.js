@@ -8,14 +8,19 @@ var jwt = require("jsonwebtoken");
 const app = express();
 
 app.use(express.json());
+let allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Headers', "*");
+  next();
+}
+app.use(allowCrossDomain);
+const usersRoutes = require('./routes/users');
 
-// const usersRoutes = require('./routes/users');
-
-// app.use('/api/v1/users',usersRoutes)
+app.use('/api/v1/users',usersRoutes)
 // Logic goes here
 // importing user context
-const User = require("./model/user");
-
+// const User = require("./model/user");
+/* 
 // Register
 app.post("/register", async (req, res) => {
 
@@ -102,7 +107,7 @@ app.post("/login", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-});
+}); */
 
 const auth = require("./middleware/auth");
 

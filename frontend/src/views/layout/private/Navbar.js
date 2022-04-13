@@ -6,6 +6,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Toolbar } from "@mui/material";
 import MuiAppBar from '@mui/material/AppBar';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { userActions } from '../../../actions';
 
 const drawerWidth = 240;
 
@@ -27,9 +29,9 @@ const AppBar = styled(MuiAppBar, {
     }),
   }));
   
-const Navbar = ({onClick, open, useAuth}) => {
-    
-    let auth = useAuth();
+const Navbar = ({onClick, open}) => {
+    let dispatch = useDispatch()
+
     let navigate = useNavigate();
     
     return (
@@ -61,7 +63,7 @@ const Navbar = ({onClick, open, useAuth}) => {
             >
               Dashboard
             </Typography>
-            <IconButton onClick={() => {auth.signout(() => navigate("/"));}} color="inherit">
+            <IconButton onClick={() => { dispatch(userActions.logout(() => navigate("/"))) }} color="inherit">
                 <LogoutIcon />
             </IconButton>
           </Toolbar>

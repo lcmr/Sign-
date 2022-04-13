@@ -11,9 +11,10 @@ const rightLink = {
   ml: 3,
 };
 
-const Header = ({useAuth}) => {
+const Header = () => {
 
-  let auth = useAuth();
+  let user = JSON.parse(localStorage.getItem('user'));
+
   return(
     <div>
       <AppBar position="fixed">
@@ -31,36 +32,36 @@ const Header = ({useAuth}) => {
           </Link>
           <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
             {
-              !auth.user ?
-            <>
-            <Link
-              color="inherit"
-              variant="h6"
-              underline="none"
-              to="/login"
-              component={RouterLink}
-              sx={rightLink}
-            >
-              {'Iniciar Sesion'}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              to="/singup/"
-              component={RouterLink}
-              sx={{ ...rightLink, color: 'error.main' }}
-            >
-              {'Registrarse'}
-            </Link>
-            </>
+              !user || !user.token ?
+              <>
+                <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  to="/login"
+                  component={RouterLink}
+                  sx={rightLink}
+                >
+                  {'Iniciar Sesion'}
+                </Link>
+                <Link
+                  variant="h6"
+                  underline="none"
+                  to="/singup/"
+                  component={RouterLink}
+                  sx={{ ...rightLink, color: 'error.main' }}
+                >
+                  {'Registrarse'}
+                </Link>
+              </>
               :
               <Link
-              variant="h6"
-              underline="none"
-              to="/private/"
-              component={RouterLink}
-              sx={rightLink}
-            >
+                variant="h6"
+                underline="none"
+                to="/private/"
+                component={RouterLink}
+                sx={rightLink}
+              >
               {'Dashboard'}
             </Link>
             }

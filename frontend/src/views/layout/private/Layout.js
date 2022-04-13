@@ -8,7 +8,7 @@ import { useState } from 'react';
 import Sidebar from './Sidebar';
 
 
-const Layout = ({useAuth}) => {
+const Layout = () => {
     const [open, setOpen] = useState(true);
     const toggleDrawer = () => {
       setOpen(!open);
@@ -16,7 +16,7 @@ const Layout = ({useAuth}) => {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <Navbar onClick={toggleDrawer} useAuth={useAuth} open={open}/>
+            <Navbar onClick={toggleDrawer} open={open}/>
             <Sidebar onClick={toggleDrawer} open={open}/>
             <Box
                 component="main"

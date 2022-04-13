@@ -1,19 +1,13 @@
+// import 'dotenv/config'
 import { blue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Layout from './views/layout/public/Layout';
-import {Layout as PrivateLayout} from './views/layout/private/Layout';
-
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Layout as PrivateLayout} from './views/layout/private/Layout';
+import { Routes, Route } from "react-router-dom";
 import Home from './views/Home';
 import Login from './views/Login';
 import SingUp from './views/SingUp';
-import AuthProvider from './auth/AuthProvider';
-import { createContext, useContext } from 'react';
 import RequireAuth from './auth/RequireAuth';
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -22,40 +16,27 @@ const theme = createTheme({
   },
 });
 
-
-const AuthContextType = {
-  user: null,
-  signin: (user, callback) => {},
-  signout: (callback) => {},
-}
-let AuthContext = createContext(AuthContextType);
-const useAuth = () =>{
-  return useContext(AuthContext);
-}
 function App() {
   
-
   return (
     <ThemeProvider theme={theme}>
-      <AuthProvider AuthContext={AuthContext}>
-        <Routes>
-            <Route path="/" element={<Layout useAuth={useAuth} />}>
-              <Route index element={<Home />} />
-              <Route path="login" element={<Login useAuth={useAuth} />}/>
-              <Route path="singup" element={<SingUp />}/>
-          </Route>
-          <Route 
-            path="/private" 
-            element={
-                <RequireAuth useAuth={useAuth}>
-                  <PrivateLayout useAuth={useAuth}>
-                      <Route index element={<Home />} />
-                  </PrivateLayout>
-                </RequireAuth>
-            } 
-          />
-        </Routes>
-      </AuthProvider>
+      <Routes>
+          <Route path="/" element={<Layout/>}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />}/>
+            <Route path="singup" element={<SingUp />}/>
+        </Route>
+        <Route 
+          path="/private" 
+          element={
+              <RequireAuth>
+                <PrivateLayout>
+                    <Route index element={<Home />} />
+                </PrivateLayout>
+              </RequireAuth>
+          } 
+        />
+      </Routes>
     </ThemeProvider>
   );
 }

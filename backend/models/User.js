@@ -4,15 +4,13 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
   {
-    username: {
+    first_name: {
       type: String,
       required: true,
-      unique: true,
-      validate: (value) => {
-        const regexp = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
-
-        return regexp.test(value);
-      },
+    },
+    last_name: {
+      type: String,
+      required: true,
     },
     email: {
       type: String,

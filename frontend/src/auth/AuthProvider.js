@@ -1,12 +1,14 @@
 import { useState } from "react";
 
 import { fakeAuthProvider } from "./FakeAuth";
+import { auth } from "./Auth";
 
 const AuthProvider = ({ children, AuthContext }) => {
     let [user, setUser] = useState(null);
   
     let signin = (newUser, callback) => {
-      return fakeAuthProvider.signin(() => {
+
+      return auth.signin(newUser,() => {
         setUser(newUser);
         callback();
       });

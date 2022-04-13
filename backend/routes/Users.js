@@ -5,4 +5,5 @@ const usersController = require('../controllers/users');
 // Con el método POST, en el endpoint /signup
 // podremos registrar a nuestro usuario
 router.post('/signup', usersController.signup);
+router.post('/login', usersController.login);
 module.exports = router;

@@ -11,30 +11,35 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { userActions } from '../actions';
+import AlertMessage from '../components/Alert';
 
-const Login = ({useAuth}) => {
+
+const Login = () => {
+  let dispatch = useDispatch()
   let navigate = useNavigate();
   let location = useLocation();
-  let auth = useAuth();
+  // let auth = useAuth();
 
   let [email, setEmail] = useState('')
   let [password, setPassword] = useState('')
   
   let from = location.state?.from?.pathname || "/private";
   const handleSubmit = (e) => {
-    
     e.preventDefault()
 
-    let username = email;
-    auth.signin(username, () => {
-      // Send them back to the page they tried to visit when they were
-      // redirected to the login page. Use { replace: true } so we don't create
-      // another entry in the history stack for the login page.  This means that
-      // when they get to the protected page and click the back button, they
-      // won't end up back on the login page, which is also really nice for the
-      // user experience.
-      navigate(from, { replace: true });
-    });  }
+    dispatch(userActions.login(email, password, () => navigate(from, { replace: true })));
+    // auth.signin(username, () => {
+    //   // Send them back to the page they tried to visit when they were
+    //   // redirected to the login page. Use { replace: true } so we don't create
+    //   // another entry in the history stack for the login page.  This means that
+    //   // when they get to the protected page and click the back button, they
+    //   // won't end up back on the login page, which is also really nice for the
+    //   // user experience.
+    //   navigate(from, { replace: true });
+    // });  
+  }
   return(
       <>
       <CssBaseline />
@@ -61,7 +66,7 @@ const Login = ({useAuth}) => {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={val => setEmail(val)}
+            onChange={val => setEmail(val.target.value)}
           />
           <TextField
             margin="normal"
@@ -72,12 +77,13 @@ const Login = ({useAuth}) => {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={val => setPassword(val)}
+            onChange={val => setPassword(val.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Recuerdame"
           />
+          <AlertMessage/>
           <Button
             type="submit"
             fullWidth
