@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import { useState } from 'react';
 import Sidebar from './Sidebar';
+import AlertMessage from '../../../components/Alert';
 
 
 const Layout = () => {
@@ -32,6 +33,7 @@ const Layout = () => {
             >   
             <Toolbar />
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                <AlertMessage/>
                 <Outlet />
             </Container>
         </Box>

@@ -124,6 +124,6 @@ app.use("*", (req, res) => {
         message: "You reached a route that is not defined on this server",
       },
     });
-  });
+});
   
 module.exports = app;

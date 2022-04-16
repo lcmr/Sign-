@@ -7,7 +7,7 @@ import { Toolbar } from "@mui/material";
 import MuiAppBar from '@mui/material/AppBar';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-import { userActions } from '../../../actions';
+import { authActions } from '../../../actions';
 
 const drawerWidth = 240;
 
@@ -63,7 +63,7 @@ const Navbar = ({onClick, open}) => {
             >
               Dashboard
             </Typography>
-            <IconButton onClick={() => { dispatch(userActions.logout(() => navigate("/"))) }} color="inherit">
+            <IconButton onClick={() => { dispatch(authActions.logout(() => navigate("/"))) }} color="inherit">
                 <LogoutIcon />
             </IconButton>
           </Toolbar>
