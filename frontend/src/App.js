@@ -11,10 +11,13 @@ import RequireAuth from './auth/RequireAuth';
 import Dashboard from './views/private/Dashboard';
 import Profile from './views/private/Profile';
 import Progress from './views/private/Progress';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { alertActions } from './actions';
 import { useLocation } from 'react-router-dom';
+import LettersList from './views/private/LettersList';
+import NumbersList from './views/private/NumbersList';
+import OthersList from './views/private/OthersList';
 
 const theme = createTheme({
   palette: {
@@ -60,6 +63,30 @@ function App() {
             element={
               <RequireAuth>
                 <Progress />
+              </RequireAuth>
+            } 
+          />
+          <Route 
+            path="progress/letters-list" 
+            element={
+              <RequireAuth>
+                <LettersList />
+              </RequireAuth>
+            } 
+          />
+          <Route 
+            path="progress/numbers-list" 
+            element={
+              <RequireAuth>
+                <NumbersList />
+              </RequireAuth>
+            } 
+          />
+          <Route 
+            path="progress/others-list" 
+            element={
+              <RequireAuth>
+                <OthersList />
               </RequireAuth>
             } 
           />

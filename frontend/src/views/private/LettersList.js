@@ -2,14 +2,12 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
-const Dashboard = () => {
-    return(
-        <Container>
-            <Paper>
-                Dashboard
-            </Paper>
+const LettersList = () => {
+    return (
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+
         </Container>
     )
 }
 
-export default Dashboard
+export default LettersList

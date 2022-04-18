@@ -10,7 +10,7 @@ import MuiDrawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 
 const drawerWidth = 240;
@@ -43,6 +43,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const Sidebar = ({open, onClick}) => {
   let navigate = useNavigate()
+  let location = useLocation()
     return(
         <Drawer variant="permanent" open={open}>
           <Toolbar
@@ -60,6 +61,7 @@ const Sidebar = ({open, onClick}) => {
           <Divider />
           <List component="nav"> 
             <ListItemButton
+              selected={location.pathname==='/private'}
               onClick={() => navigate('/private')}
             >
                 <ListItemIcon>
@@ -69,6 +71,7 @@ const Sidebar = ({open, onClick}) => {
             </ListItemButton>
             <ListItemButton
               onClick={() => navigate('/private/profile')}
+              selected={location.pathname==='/private/profile'}
             >
                 <ListItemIcon>
                     <PersonIcon />
@@ -77,6 +80,7 @@ const Sidebar = ({open, onClick}) => {
             </ListItemButton>
             <ListItemButton
               onClick={() => navigate('/private/progress')}
+              selected={location.pathname==='/private/progress'}
             >
                 <ListItemIcon>
                     <TaskIcon />
